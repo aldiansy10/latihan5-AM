@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProfilePage(),
-    ),
+    const MaterialApp(debugShowCheckedModeBanner: false, home: ProfilePage()),
   );
 }
 
@@ -16,6 +13,14 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final String userName = 'Jus Kaur';
     final String role = 'Jus Buah Segar dan Nikmat Setiap Hari';
+
+    final List<String> experiences = [
+      'Jus Alpukat - Rp15.000',
+      'Jus Mangga - Rp12.000',
+      'Jus Jeruk - Rp10.000',
+      'Jus Buah Naga - Rp13.000',
+      'Jus Jambu - Rp10.000',
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -31,13 +36,10 @@ class ProfilePage extends StatelessWidget {
             const CircleAvatar(
               radius: 50,
               backgroundColor: Colors.grey,
-              child: Icon(
-                Icons.local_drink,
-                size: 50,
-                color: Colors.white,
-              ),
+              child: Icon(Icons.local_drink, size: 50, color: Colors.white),
             ),
             const SizedBox(height: 16),
+
             Column(
               children: [
                 Text(
@@ -51,33 +53,51 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   role,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[700],
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
+
             const SizedBox(height: 24),
 
             // Statistik usaha Jus Kaur
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
-                StatItem(
-                  jumlah: '15',
-                  judul: 'Menu Jus',
-                ),
-                StatItem(
-                  jumlah: '1.2K',
-                  judul: 'Pelanggan',
-                ),
-                StatItem(
-                  jumlah: '42',
-                  judul: 'Terjual',
-                ),
+                StatItem(jumlah: '15', judul: 'Menu Jus'),
+                StatItem(jumlah: '1.2K', judul: 'Pelanggan'),
+                StatItem(jumlah: '42', judul: 'Terjual'),
               ],
+            ),
+
+            const SizedBox(height: 24),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Daftar Menu Jus',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            Expanded(
+              child: ListView.builder(
+                itemCount: experiences.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.local_drink,
+                        color: Colors.blueAccent,
+                      ),
+                      title: Text(experiences[index]),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -90,11 +110,7 @@ class StatItem extends StatelessWidget {
   final String jumlah;
   final String judul;
 
-  const StatItem({
-    super.key,
-    required this.jumlah,
-    required this.judul,
-  });
+  const StatItem({super.key, required this.jumlah, required this.judul});
 
   @override
   Widget build(BuildContext context) {
@@ -102,18 +118,10 @@ class StatItem extends StatelessWidget {
       children: [
         Text(
           jumlah,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
-        Text(
-          judul,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
-        ),
+        Text(judul, style: const TextStyle(fontSize: 14)),
       ],
     );
   }
